@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+apply from: "../config.gradle"
+android {
+    compileSdkVersion android.compileSdkVersion
+
+    defaultConfig {
+        applicationId android.applicationId
+        minSdkVersion android.minSdkVersion
+        targetSdkVersion android.targetSdkVersion
+        versionCode android.versiionCode
+        versionName android.versionName
+        testInstrumentationRunner android.android_junit_runner
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [eventBusIndex: 'com.example.customview.MyEventBusIndex']
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.appcompat_v7
+    implementation deps.constraint_layout
+    testImplementation deps.junit
+    testImplementation deps.mockito_core
+    androidTestImplementation deps.mockito_core
+    androidTestImplementation deps.test_runner
+    androidTestImplementation deps.espresso_core
+
+    api deps.eventbus
+    annotationProcessor deps.eventbus_annotation_processor
+
+    api deps.retrofit
+    api deps.converter_gson
+    api deps.rxandroid
+    api deps.rxjava
+    api deps.adapter_rxjava2
+}

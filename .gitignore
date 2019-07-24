@@ -1,0 +1,10 @@
+
+### Android template\
+gradle
+.idea/
+build/
+.gradle/
+local.properties
+*.iml
+
+
